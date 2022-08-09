@@ -1,4 +1,6 @@
-// route to get logged in user's info (needs the token)
+import { Query } from "mongoose";
+
+// route to get logged in user's info (needs token)
 export const getMe = (token) => {
   return fetch('/api/users/me', {
     headers: {
@@ -8,6 +10,7 @@ export const getMe = (token) => {
   });
 };
 
+// route to create a new user
 export const createUser = (userData) => {
   return fetch('/api/users', {
     method: 'POST',
@@ -18,6 +21,7 @@ export const createUser = (userData) => {
   });
 };
 
+// route to login a new user
 export const loginUser = (userData) => {
   return fetch('/api/users/login', {
     method: 'POST',
@@ -50,8 +54,7 @@ export const deleteMovie = (movieId, token) => {
   });
 };
 
-// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
-export const searchGoogleBooks = (query) => {
-  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+// make a search to moviesDB api
+export const searchMovieDB = (query) => {
+  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=b301706861e13908cad92231cd20695f&language=en-US&query=${query}`);
 };

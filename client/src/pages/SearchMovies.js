@@ -29,7 +29,7 @@ const SearchMovies = () => {
     }
 
     try {
-      const response = await searchGoogleMovies(searchInput);
+      const response = await searchMovieDB(searchInput);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
