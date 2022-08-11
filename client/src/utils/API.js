@@ -1,5 +1,3 @@
-import { Query } from "mongoose";
-
 // route to get logged in user's info (needs token)
 export const getMe = (token) => {
   return fetch('/api/users/me', {

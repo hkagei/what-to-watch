@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveMovie, searchGoogleMovies } from '../utils/API';
+import { saveMovie, searchMovieDB } from '../utils/API';
 import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
 
 const SearchMovies = () => {
@@ -12,10 +12,8 @@ const SearchMovies = () => {
   const [searchInput, setSearchInput] = useState('');
 
   // create state to hold saved MovieId values
-  const [savedMovieIds, setSavedMovieIds] = useState(getSavedMovieIds());
+  const [savedMovieIds, setSavedMovieIds] = useState([]);
 
-  // set up useEffect hook to save `savedMovieIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveMovieIds(savedMovieIds);
   });
@@ -37,12 +35,11 @@ const SearchMovies = () => {
 
       const { items } = await response.json();
 
-      const movieData = items.map((movie) => ({
+      const movieData = items.results.map((movie) => ({
         movieId: movie.id,
-        authors: movie.volumeInfo.authors || ['No author to display'],
-        title: movie.volumeInfo.title,
-        description: movie.volumeInfo.description,
-        image: movie.volumeInfo.imageLinks?.thumbnail || '',
+        title: movie.title,
+        summary: movie.summary,
+        art: movie.art
       }));
 
       setSearchedMovies(movieData);
@@ -82,7 +79,7 @@ const SearchMovies = () => {
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Search for Movies!</h1>
+          <h1>Find a Movie</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -92,7 +89,7 @@ const SearchMovies = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a book'
+                  placeholder='Find a Movie'
                 />
               </Col>
               <Col xs={12} md={4}>
@@ -109,7 +106,7 @@ const SearchMovies = () => {
         <h2>
           {searchedMovies.length
             ? `Viewing ${searchedMovies.length} results:`
-            : 'Search for a book to begin'}
+            : 'Type in a movie title to begin!'}
         </h2>
         <CardColumns>
           {searchedMovies.map((movie) => {
