@@ -46,6 +46,8 @@ const SearchMovies = () => {
         rating: movie.vote_average
       }));
 
+      console.log(movieData)
+
       // const movieData = items.map((items) => {
       //   return fetch(url)
       //     .then(response => response.json())
@@ -124,12 +126,13 @@ const SearchMovies = () => {
             return (
               <Card key={movie.movieId} border='dark'>
                 {movie.image ? (
-                  <Card.Img src={movie.image} alt={`The cover for ${movie.title}`} variant='top' />
+                  <Card.Img src={"https://image.tmdb.org/t/p/w500/" + movie.image} alt={`The cover for ${movie.title}`} variant='top' />
                 ) : null}
                 <Card.Body>
                   <Card.Title>{movie.title}</Card.Title>
-                  <p className='small'>Authors: {movie.authors}</p>
                   <Card.Text>{movie.description}</Card.Text>
+                  <Card.Text>Release Date: {movie.releaseDate}</Card.Text>
+                  <Card.Text>Rating: {movie.rating}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)}
