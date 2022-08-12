@@ -53,7 +53,7 @@ export const deleteMovie = (movieId, token) => {
 
 
 export const searchMovies = (query) => {
-  return fetch(`https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=${query}`);
+  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=06439846ed9757bb6b3c2ed866d66876&query=${query}`);
 };
 
 // https://.themoviedb.org/3/movie/550?api_key=06439846ed9757bb6b3c2ed866d66876api

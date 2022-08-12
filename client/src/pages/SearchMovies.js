@@ -23,6 +23,7 @@ const SearchMovies = () => {
   // create method to search for Movies and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    debugger;
 
     if (!searchInput) {
       return false;
@@ -92,7 +93,7 @@ const SearchMovies = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a book'
+                  placeholder='Search for a movie'
                 />
               </Col>
               <Col xs={12} md={4}>
