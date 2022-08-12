@@ -11,16 +11,19 @@ const movieSchema = new Schema({
     type: String,
     required: true
   },
-  art: {
+  poster_path: {
     type: String,
     required: true,
   },  
-  summary: {
+  overview: {
     type: String,
     required: true,
   },
   release_date: {
     type: String
+  },
+  popularity: {
+    type: Number
   }
 },
 {

@@ -33,13 +33,18 @@ const SearchMovies = () => {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
 
-      const movieData = items.results.map((movie) => ({
+      const {results} = await response.json();
+
+      console.log(await results)
+
+      const movieData = results.map((movie) => ({
         movieId: movie.id,
         title: movie.title,
-        summary: movie.summary,
-        art: movie.art
+        overview: movie.overview,
+        poster_path: movie.poster_path,
+        popularity: movie.popularity,
+        release_date: movie.release_date
       }));
 
       setSearchedMovies(movieData);
@@ -112,13 +117,13 @@ const SearchMovies = () => {
           {searchedMovies.map((movie) => {
             return (
               <Card key={movie.movieId} border='dark'>
-                {movie.image ? (
-                  <Card.Img src={movie.image} alt={`The cover for ${movie.title}`} variant='top' />
+                {movie.poster_path ? (
+                  <Card.Img src={'https://image.tmdb.org/t/p/w500'+movie.poster_path} alt={`The cover for ${movie.title}`} variant='top' />
                 ) : null}
                 <Card.Body>
                   <Card.Title>{movie.title}</Card.Title>
-                  <p className='small'>Authors: {movie.authors}</p>
-                  <Card.Text>{movie.description}</Card.Text>
+                  <p className='small'>Release Date: {movie.release_date}</p>
+                  <Card.Text>{movie.overview}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)}
