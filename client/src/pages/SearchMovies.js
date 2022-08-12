@@ -23,7 +23,6 @@ const SearchMovies = () => {
   // create method to search for Movies and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    debugger;
 
     if (!searchInput) {
       return false;
@@ -36,15 +35,23 @@ const SearchMovies = () => {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
+      const { data } = await response.json();
 
-      const movieData = items.map((movie) => ({
+      const movieData = data.map((movie) => ({
         movieId: movie.id,
-        authors: movie.volumeInfo.authors || ['No author to display'],
-        title: movie.volumeInfo.title,
-        description: movie.volumeInfo.description,
-        image: movie.volumeInfo.imageLinks?.thumbnail || '',
+        title: movie.original_title,
+        description: movie.overview,
+        image: movie.poster || '',
+        releaseDate: movie.release_date,
+        rating: movie.vote_average
       }));
+
+      // const movieData = items.map((items) => {
+      //   return fetch(url)
+      //     .then(response => response.json())
+      //     .then((data) => { return data })
+      //     .catch(err => console.log(err))
+      // })
 
       setSearchedMovies(movieData);
       setSearchInput('');
@@ -110,7 +117,7 @@ const SearchMovies = () => {
         <h2>
           {searchedMovies.length
             ? `Viewing ${searchedMovies.length} results:`
-            : 'Search for a book to begin'}
+            : 'Search for a movie to begin'}
         </h2>
         <CardColumns>
           {searchedMovies.map((movie) => {
