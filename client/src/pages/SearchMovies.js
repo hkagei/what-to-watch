@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveMovie, searchGoogleMovies } from '../utils/API';
+import { saveMovie, searchMovies } from '../utils/API';
 import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
 
 const SearchMovies = () => {
@@ -29,7 +29,7 @@ const SearchMovies = () => {
     }
 
     try {
-      const response = await searchGoogleMovies(searchInput);
+      const response = await searchMovies(searchInput);
 
       if (!response.ok) {
         throw new Error('something went wrong!');

@@ -53,11 +53,7 @@ export const deleteMovie = (movieId, token) => {
 
 
 export const searchMovies = (query) => {
-  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+  return fetch(`https://.themoviedb.org/3/movie/550?api_key=06439846ed9757bb6b3c2ed866d66876api&query=${query}`);
 };
 
-// // make a search to google books api
-// // https://www.googleapis.com/books/v1/volumes?q=harry+potter
-// export const searchGoogleBooks = (query) => {
-//   return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-// };
+// https://.themoviedb.org/3/movie/550?api_key=06439846ed9757bb6b3c2ed866d66876api
