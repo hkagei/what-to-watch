@@ -24,19 +24,19 @@ export const ADD_USER = gql`
   }
 `;
 
-export const SAVE_Movie = gql`
+export const SAVE_MOVIE = gql`
     mutation saveMovie($movieData: movieInput!) {
         saveMovie(movieData: $movieData) {
             _id
             username
             email
             savedMovie {
-                movieId
-                authors
-                image
-                description
-                title
-                link
+              movieId
+              title
+              description
+              image
+              releaseDate
+              rating
             }
         }
     }
@@ -49,12 +49,12 @@ mutation removeMovie($movieId: ID!) {
         username
         email
         savedMovie {
-            movieId
-            authors
-            image
-            description
-            title
-            link
+          movieId
+          title
+          description
+          image
+          releaseDate
+          rating
         }
     }
 }

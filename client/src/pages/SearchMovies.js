@@ -40,6 +40,7 @@ const SearchMovies = () => {
       const movieData = results.map((movie) => ({
         movieId: movie.id,
         title: movie.original_title,
+        genre: movie.genre_ids,
         description: movie.overview,
         image: movie.poster_path || '',
         releaseDate: movie.release_date,
@@ -47,13 +48,6 @@ const SearchMovies = () => {
       }));
 
       console.log(movieData)
-
-      // const movieData = items.map((items) => {
-      //   return fetch(url)
-      //     .then(response => response.json())
-      //     .then((data) => { return data })
-      //     .catch(err => console.log(err))
-      // })
 
       setSearchedMovies(movieData);
       setSearchInput('');
@@ -130,6 +124,7 @@ const SearchMovies = () => {
                 ) : null}
                 <Card.Body>
                   <Card.Title>{movie.title}</Card.Title>
+                  <Card.Text>{movie.genre_ids}</Card.Text>
                   <Card.Text>{movie.description}</Card.Text>
                   <Card.Text>Release Date: {movie.releaseDate}</Card.Text>
                   <Card.Text>Rating: {movie.rating}</Card.Text>

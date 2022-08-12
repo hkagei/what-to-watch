@@ -7,11 +7,11 @@ export const QUERY_ME = gql`
         email
         savedMovies{
             movieId
-            authors
-            image
-            description
             title
-            link
+            description
+            image
+            releaseDate
+            rating
         }
 
     }

@@ -85,8 +85,10 @@ const SavedMovies = () => {
                 {movie.image ? <Card.Img src={movie.image} alt={`The cover for ${movie.title}`} variant='top' /> : null}
                 <Card.Body>
                   <Card.Title>{movie.title}</Card.Title>
-                  <p className='small'>Authors: {movie.authors}</p>
+                  <Card.Text>{movie.genre_ids}</Card.Text>
                   <Card.Text>{movie.description}</Card.Text>
+                  <Card.Text>Release Date: {movie.releaseDate}</Card.Text>
+                  <Card.Text>Rating: {movie.rating}</Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeleteMovie(movie.movieId)}>
                     Delete this movie!
                   </Button>
