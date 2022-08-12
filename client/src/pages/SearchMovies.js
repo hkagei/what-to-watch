@@ -35,13 +35,13 @@ const SearchMovies = () => {
         throw new Error('something went wrong!');
       }
 
-      const { data } = await response.json();
+      const { results } = await response.json();
 
-      const movieData = data.map((movie) => ({
+      const movieData = results.map((movie) => ({
         movieId: movie.id,
         title: movie.original_title,
         description: movie.overview,
-        image: movie.poster || '',
+        image: movie.poster_path || '',
         releaseDate: movie.release_date,
         rating: movie.vote_average
       }));
