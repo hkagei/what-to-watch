@@ -10,7 +10,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    savedBooks: [Book]
+    savedMovies: [Movie]
   }
 
   type Movie {
