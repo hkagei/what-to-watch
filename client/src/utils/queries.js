@@ -7,11 +7,17 @@ export const QUERY_ME = gql`
         email
         savedMovies{
             movieId
+<<<<<<< HEAD
             authors
             image
             description
+=======
+>>>>>>> feature/mongo
             title
-            link
+            description
+            image
+            releaseDate
+            rating
         }
 
     }

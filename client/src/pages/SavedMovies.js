@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
-import { getMe, deleteBook } from '../utils/API';
+import { getMe, deleteMovie } from '../utils/API';
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import { removeMovieId } from '../utils/localStorage';
 
-const SavedBooks = () => {
+const SavedMovies = () => {
   const [userData, setUserData] = useState({});
 
   // use this to determine if `useEffect()` hook needs to run again
@@ -36,8 +36,8 @@ const SavedBooks = () => {
     getUserData();
   }, [userDataLength]);
 
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteBook = async (bookId) => {
+  // create function that accepts the Movie's mongo _id value as param and deletes the Movie from the database
+  const handleDeleteMovie = async (movieId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -45,7 +45,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      const response = await deleteMovie(movieId, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -53,8 +53,8 @@ const SavedBooks = () => {
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
-      removeBookId(bookId);
+      // upon success, remove movie's id from localStorage
+      removeMovieId(movieId);
     } catch (err) {
       console.error(err);
     }
@@ -74,21 +74,31 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
-            : 'You have no saved books!'}
+          {userData.savedMovies.length
+            ? `Viewing ${userData.savedMovies.length} saved ${userData.savedMovies.length === 1 ? 'movie' : 'movies'}:`
+            : 'You have no saved movies!'}
         </h2>
         <CardColumns>
-          {userData.savedBooks.map((book) => {
+          {userData.savedMovies.map((movie) => {
             return (
-              <Card key={book.bookId} border='dark'>
-                {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
+              <Card key={movie.movieId} border='dark'>
+                {movie.image ? <Card.Img src={movie.image} alt={`The cover for ${movie.title}`} variant='top' /> : null}
                 <Card.Body>
+<<<<<<< HEAD:client/src/pages/SavedBooks.js
                   <Card.Title>{book.title}</Card.Title>
                   <p className='small'>Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
                     Delete this Movie!
+=======
+                  <Card.Title>{movie.title}</Card.Title>
+                  <Card.Text>{movie.genre_ids}</Card.Text>
+                  <Card.Text>{movie.description}</Card.Text>
+                  <Card.Text>Release Date: {movie.releaseDate}</Card.Text>
+                  <Card.Text>Rating: {movie.rating}</Card.Text>
+                  <Button className='btn-block btn-danger' onClick={() => handleDeleteMovie(movie.movieId)}>
+                    Delete this movie!
+>>>>>>> feature/mongo:client/src/pages/SavedMovies.js
                   </Button>
                 </Card.Body>
               </Card>
@@ -100,4 +110,4 @@ const SavedBooks = () => {
   );
 };
 
-export default SavedBooks;
+export default SavedMovies;

@@ -15,19 +15,31 @@ const AppNavbar = () => {
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
+<<<<<<< HEAD
             What to Watch?
+=======
+            Find Movies
+>>>>>>> feature/mongo
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
               <Nav.Link as={Link} to='/'>
+<<<<<<< HEAD
                 Search For Your Favorite Movies
+=======
+                Search For Movies
+>>>>>>> feature/mongo
               </Nav.Link>
-              {/* if user is logged in show saved books and logout */}
+              {/* if user is logged in show saved movies and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
+<<<<<<< HEAD
                     See Your Saved Movies
+=======
+                    See Saved Movies
+>>>>>>> feature/mongo
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>

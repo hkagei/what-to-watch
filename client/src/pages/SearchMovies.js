@@ -2,25 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveBook, searchGoogleBooks } from '../utils/API';
-import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
+import { saveMovie, searchMovies } from '../utils/API';
+import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
 
-const SearchBooks = () => {
+const SearchMovies = () => {
   // create state for holding returned google api data
-  const [searchedBooks, setSearchedBooks] = useState([]);
+  const [searchedMovies, setSearchedMovies] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
 
-  // create state to hold saved bookId values
-  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  // create state to hold saved MovieId values
+  const [savedMovieIds, setSavedMovieIds] = useState(getSavedMovieIds());
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedMovieIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
-    return () => saveBookIds(savedBookIds);
+    return () => saveMovieIds(savedMovieIds);
   });
 
-  // create method to search for books and set state on form submit
+  // create method to search for Movies and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -29,7 +29,7 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await searchGoogleBooks(searchInput);
+      const response = await searchMovies(searchInput);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -37,25 +37,29 @@ const SearchBooks = () => {
 
       const { results } = await response.json();
 
-      const bookData = items.map((movie) => ({
-        image: movie.backdrop_path,
-        authors: book.volumeInfo.authors || ['No author to display'],
-        title: book.volumeInfo.title,
-        description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || '',
+      const movieData = results.map((movie) => ({
+        movieId: movie.id,
+        title: movie.original_title,
+        genre: movie.genre_ids.id,
+        description: movie.overview,
+        image: movie.poster_path || '',
+        releaseDate: movie.release_date,
+        rating: movie.vote_average
       }));
 
-      setSearchedBooks(bookData);
+      console.log(movieData)
+
+      setSearchedMovies(movieData);
       setSearchInput('');
     } catch (err) {
       console.error(err);
     }
   };
 
-  // create function to handle saving a book to our database
-  const handleSaveBook = async (bookId) => {
-    // find the book in `searchedBooks` state by the matching id
-    const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+  // create function to handle saving a movie to our database
+  const handleSaveMovie = async (movieId) => {
+    // find the movie in `searchedMovies` state by the matching id
+    const movieToSave = searchedMovies.find((movie) => movie.movieId === movieId);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -65,14 +69,14 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await saveBook(bookToSave, token);
+      const response = await saveMovie(movieToSave, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
-      // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      // if movie successfully saves to user's account, save movie id to state
+      setSavedMovieIds([...savedMovieIds, movieToSave.movieId]);
     } catch (err) {
       console.error(err);
     }
@@ -107,29 +111,30 @@ const SearchBooks = () => {
 
       <Container>
         <h2>
-          {searchedBooks.length
-            ? `Viewing ${searchedBooks.length} results:`
+          {searchedMovies.length
+            ? `Viewing ${searchedMovies.length} results:`
             : 'Search for a movie to begin'}
         </h2>
         <CardColumns>
-          {searchedBooks.map((book) => {
+          {searchedMovies.map((movie) => {
             return (
-              <Card key={book.bookId} border='dark'>
-                {book.image ? (
-                  <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' />
+              <Card key={movie.movieId} border='dark'>
+                {movie.image ? (
+                  <Card.Img src={"https://image.tmdb.org/t/p/w500/" + movie.image} alt={`The cover for ${movie.title}`} variant='top' />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className='small'>Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
+                  <Card.Title>{movie.title}</Card.Title>
+                  <Card.Text>{movie.description}</Card.Text>
+                  <Card.Text>Release Date: {movie.releaseDate}</Card.Text>
+                  <Card.Text>Rating: {movie.rating}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
-                      disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
+                      disabled={savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)}
                       className='btn-block btn-info'
-                      onClick={() => handleSaveBook(book.bookId)}>
-                      {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
+                      onClick={() => handleSaveMovie(movie.movieId)}>
+                      {savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)
                         ? 'This movie has already been saved!'
-                        : 'Save this Movie!'}
+                        : 'Save this movie!'}
                     </Button>
                   )}
                 </Card.Body>
@@ -142,4 +147,4 @@ const SearchBooks = () => {
   );
 };
 
-export default SearchBooks;
+export default SearchMovies;

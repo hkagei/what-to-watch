@@ -1,18 +1,40 @@
 // see SignupForm.js for comments
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
+<<<<<<< HEAD
 
 //import { loginUser } from '../utils/API';
 import { useMutation } from '@apollo/client';
 import {LOGIN_USER} from '../utils/mutations';
 
+=======
+import { useMutation } from '@apollo/react-hooks';
+import { LOGIN_USER } from '../utils/mutations';
+>>>>>>> feature/mongo
 import Auth from '../utils/auth';
 
 const LoginForm = () => {
+  // set initial form state
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  // set state for form validation
   const [validated] = useState(false);
+  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+<<<<<<< HEAD
   const [login] = useMutation(LOGIN_USER);
+=======
+  const [login, { error }] = useMutation(LOGIN_USER);
+
+  // show an alert if there is an error
+  useEffect(() => {
+    if (error) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false)
+    }
+  }, [error]);
+
+>>>>>>> feature/mongo
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -29,6 +51,7 @@ const LoginForm = () => {
     }
 
     try {
+<<<<<<< HEAD
       const {data} = await login({variables: {...userFormData}});
 
       // if (!response.ok) {
@@ -37,10 +60,16 @@ const LoginForm = () => {
 
       // const { token, user } = await response.json();
       // console.log(user);
+=======
+      const { data } = await login({
+        variables: { ...userFormData }
+      });
+      
+      console.log(data);
+>>>>>>> feature/mongo
       Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
     }
 
     setUserFormData({
