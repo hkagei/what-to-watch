@@ -25,64 +25,36 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_MOVIE = gql`
-<<<<<<< HEAD
     mutation saveMovie($movieData: MovieInput!) {
-=======
-    mutation saveMovie($movieData: movieInput!) {
->>>>>>> feature/mongo
         saveMovie(movieData: $movieData) {
             _id
             username
             email
             savedMovie {
-<<<<<<< HEAD
                 movieId
                 authors
                 image
                 description
                 title
                 link
-=======
-              movieId
-              title
-              description
-              image
-              releaseDate
-              rating
->>>>>>> feature/mongo
             }
         }
     }
 `;
 
-<<<<<<< HEAD
-export const REMOVE_MOVIE = gql`
-mutation removeMovie($movieId: ID!) {
-    removeBook(movieId: $movieId) {
-=======
 export const REMOVE_Movie = gql`
 mutation removeMovie($movieId: ID!) {
     removeMovie(movieId: $movieId) {
->>>>>>> feature/mongo
         _id
         username
         email
         savedMovie {
-<<<<<<< HEAD
-            movieId
-            authors
-            image
-            description
-            title
-            link
-=======
           movieId
           title
           description
           image
           releaseDate
           rating
->>>>>>> feature/mongo
         }
     }
 }

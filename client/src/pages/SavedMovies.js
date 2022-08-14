@@ -84,13 +84,6 @@ const SavedMovies = () => {
               <Card key={movie.movieId} border='dark'>
                 {movie.image ? <Card.Img src={movie.image} alt={`The cover for ${movie.title}`} variant='top' /> : null}
                 <Card.Body>
-<<<<<<< HEAD:client/src/pages/SavedBooks.js
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className='small'>Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
-                    Delete this Movie!
-=======
                   <Card.Title>{movie.title}</Card.Title>
                   <Card.Text>{movie.genre_ids}</Card.Text>
                   <Card.Text>{movie.description}</Card.Text>
@@ -98,7 +91,6 @@ const SavedMovies = () => {
                   <Card.Text>Rating: {movie.rating}</Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeleteMovie(movie.movieId)}>
                     Delete this movie!
->>>>>>> feature/mongo:client/src/pages/SavedMovies.js
                   </Button>
                 </Card.Body>
               </Card>
