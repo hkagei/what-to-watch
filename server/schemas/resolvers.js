@@ -38,31 +38,31 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
   },
-          saveMovie: async (parent, { movieData }, context) => {
-            console.log("Hello world")
-            console.log(context);
-            if (context.user) {
-                const updatedUser = await User.findByIdAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: {savedMovies: movieData} },
-                    { new: true }
-                )
-                return updatedUser;
-            }
-            throw new AuthenticationError('You need to be logged in!')
-        },
-        removeMovie: async (parent, { movieId }, context) => {
-          if (context.user) {
-              const updatedUser = await User.findOneAndUpdate(
-                  {_id: context.user._id},
-                  { $pull: { savedMovies: { movieId: movieId } } },
-                  { new: true }
-              )
-              return updatedUser;
-          }
-          throw new AuthenticationError('You need to be logged in!'); 
+    saveMovie: async (parent, { movieData }, context) => {
+      console.log("Hello world")
+      console.log(context);
+      if (context.user) {
+          const updatedUser = await User.findByIdAndUpdate(
+              { _id: context.user._id },
+              { $addToSet: {savedMovies: movieData} },
+              { new: true }
+          )
+          return updatedUser;
       }
+      throw new AuthenticationError('You need to be logged in!')
+  },
+  removeMovie: async (parent, { movieId }, context) => {
+    if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+            {_id: context.user._id},
+            { $pull: { savedMovies: { movieId: movieId } } },
+            { new: true }
+        )
+        return updatedUser;
     }
+    throw new AuthenticationError('You need to be logged in!'); 
+}
+}
 };
 
 module.exports = resolvers;
