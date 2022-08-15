@@ -10,7 +10,7 @@ const SavedMovies = () => {
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
-
+  
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -22,7 +22,7 @@ const SavedMovies = () => {
 
         const response = await getMe(token);
 
-        if (!response) {
+        if (!response.ok) {
           throw new Error('something went wrong!');
         }
 
