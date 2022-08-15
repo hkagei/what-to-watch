@@ -5,13 +5,15 @@ const { AuthenticationError } = require("apollo-server-express");
 const resolvers = {
     Query: {
       me: async (parent, args, context) => {
-        console.log("QUERY ME TESTING");
         if (context.user) {
           const userData = await User.findOne({ _id: context.user._id })
             .select('-__v -password')
+            .populate('thoughts')
+            .populate('friends');
       
           return userData;
         }
+      
         throw new AuthenticationError('Not logged in');
       },
         // users: async () => {
@@ -55,7 +57,7 @@ const resolvers = {
             //   }
             
               // throw new AuthenticationError('You need to be logged in!');
-            //},
+            // },
         //     addReaction: async (parent, { thoughtId, reactionBody }, context) => {
         //       if (context.user) {
         //         const updatedThought = await Thought.findOneAndUpdate(
@@ -98,7 +100,7 @@ const resolvers = {
               const token = signToken(user);
               return { token, user };
             }
-          }
+        }
 };
 
 module.exports = resolvers;
