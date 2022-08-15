@@ -1,5 +1,5 @@
 // import user model
-const { saveMovie } = require('../../client/src/utils/API');
+const { saveMovie } = require('../../client/src/utils/API')
 const { User } = require('../models');
 // import sign token function from auth
 const { signToken } = require('../utils/auth');
