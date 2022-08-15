@@ -30,7 +30,7 @@ export const loginUser = (userData) => {
 
 // save movie data for a logged in user
 export const saveMovie = (movieData, token) => {
-  return fetch('/api/users', {
+  return fetch('/api/users/movies', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
