@@ -71,7 +71,7 @@ const SearchMovies = () => {
     try {
       const response = await saveMovie(movieToSave, token);
 
-      if (!response.ok) {
+      if (!response) {
         throw new Error('something went wrong!');
       }
 

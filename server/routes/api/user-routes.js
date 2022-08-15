@@ -2,8 +2,8 @@ const router = require('express').Router();
 const {
   createUser,
   getSingleUser,
-  saveBook,
-  deleteBook,
+  saveMovie,
+  deleteMovie,
   login,
 } = require('../../controllers/user-controller');
 
