@@ -1,18 +1,18 @@
 import { gql } from "@apollo/client";
 
-export const QUERY_ME = gql`
+export const QUERY_ME = gql` {
     me{
         _id
         username
         email
-        savedMovies{
-            movieId
-            title
-            description
-            image
-            releaseDate
-            rating
+        savedMovie{
+            movieID
+            original_title
+            overview
+            poster_path
+            release_date
+            vote_average
         }
-
     }
+}
 `;
