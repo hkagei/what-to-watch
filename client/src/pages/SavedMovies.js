@@ -22,7 +22,7 @@ const SavedMovies = () => {
 
         const response = await getMe(token);
 
-        if (!response.ok) {
+        if (!response) {
           throw new Error('something went wrong!');
         }
 
