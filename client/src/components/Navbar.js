@@ -15,13 +15,13 @@ const AppNavbar = () => {
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            What to Watch?
+            Find Movies
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
               <Nav.Link as={Link} to='/'>
-                Search For Your Favorite Movies
+                Search For Movies
               </Nav.Link>
               {/* if user is logged in show saved movies and logout */}
               {Auth.loggedIn() ? (

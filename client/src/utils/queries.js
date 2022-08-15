@@ -13,5 +13,6 @@ export const QUERY_ME = gql`
             releaseDate
             rating
         }
+
     }
 `;
