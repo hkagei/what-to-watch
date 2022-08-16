@@ -6,7 +6,7 @@ export const QUERY_ME = gql` {
         username
         email
         savedMovie{
-            movieID
+            movieId
             original_title
             overview
             poster_path
