@@ -5,9 +5,11 @@ import { getMe, deleteMovie } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeMovieId } from '../utils/localStorage';
 
+
+
 const SavedMovies = () => {
   const [userData, setUserData] = useState({});
-
+  
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
 

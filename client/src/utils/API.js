@@ -29,16 +29,16 @@ export const loginUser = (userData) => {
 };
 
 // save movie data for a logged in user
-export const saveMovie = (movieData, token) => {
-  return fetch('/api/users/movies', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(movieData),
-  });
-};
+// export const saveMovie = (movieData, token) => {
+//   return fetch('/api/users/movies', {
+//     method: 'PUT',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       authorization: `Bearer ${token}`,
+//     },
+//     body: JSON.stringify(movieData),
+//   });
+// };
 
 // remove saved movie data for a logged in user
 export const deleteMovie = (movieId, token) => {
