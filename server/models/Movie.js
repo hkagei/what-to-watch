@@ -6,22 +6,22 @@ const movieSchema = new Schema({
   {
     type: String,
   },
-  original_title: {
+  title: {
     type: String,
     required: true,
   },
   // saved movie id from movies
-  overview: {
+  description: {
     type: String,
     required: true,
   },
-  poster_path: {
+  image: {
     type: String,
   },
-  release_date: {
+  releaseDate: {
     type: String,
   },
-  vote_average: {
+  rating: {
     type: String,
     required: true,
   },
