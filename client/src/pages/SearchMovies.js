@@ -188,7 +188,7 @@ const SearchMovies = () => {
       const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=06439846ed9757bb6b3c2ed866d66876&query=${searchInput}`);
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new error ('something went wrong!');
       }
 
       const { results } = await response.json();
