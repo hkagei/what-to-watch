@@ -11,7 +11,7 @@ const SavedMovies = () => {
   const { loading, data } = useQuery(QUERY_ME);
   const userData = data?.me || {};
 
-  // const [removeMovie, { error }] = useMutation(REMOVE_MOVIE);
+  const [removeMovie, { error }] = useMutation(REMOVE_MOVIE);
 
   // const userDataLength = Object.keys(userData).length;
   // useEffect(() => {
@@ -50,7 +50,9 @@ const SavedMovies = () => {
 
     try {
       const { data } = await deleteMovie(movieId, token);
+      removeMovie(movieId);
       removeMovieId(movieId);
+      
 
       if (!data.ok) {
         throw new Error('something went wrong!');
