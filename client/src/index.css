@@ -46,12 +46,7 @@ color: var(--movie-black);
   background-color: var(--movie-gold);
 }
 
-.card {
-  border-radius: 4px;
-  border-width: 4px;
-  border-style: solid;
-  border-color: var(--movie-black);
-}
+
 
 .button {
   background-color: var(--movie-red);
@@ -77,4 +72,42 @@ color: var(--movie-black);
 
 .formlink {
   background-color: var(--movie-yellow);
+}
+
+
+/* Cards */
+.card {
+  border-radius: 4px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--movie-black);
+  padding: 20px;
+  background-color: var(--movie-yellow);
+}
+
+.cardimg {
+  margin: auto;
+  border-radius: 4px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--movie-black);
+}
+
+.title {
+text-align: center;
+font-size: large;
+font-weight: bold;
+font-family: "Dela Gothic One", sans-serif;
+}
+
+.description {
+  text-align: center;
+}
+
+.release {
+  text-align: center;
+}
+
+.rating {
+  text-align: center;
 }

@@ -120,17 +120,17 @@ const SearchMovies = () => {
             return (
               <Card key={movie.movieId} border='dark' classname="card">
                 {movie.image ? (
-                  <Card.Img src={"https://image.tmdb.org/t/p/w500/" + movie.image} alt={`The cover for ${movie.title}`} variant='top' />
+                  <Card.Img src={"https://image.tmdb.org/t/p/w500/" + movie.image} className="cardimg" alt={`The cover for ${movie.title}`} variant='top' />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{movie.title}</Card.Title>
-                  <Card.Text>{movie.description}</Card.Text>
-                  <Card.Text>Release Date: {movie.releaseDate}</Card.Text>
-                  <Card.Text>Rating: {movie.rating}</Card.Text>
+                  <Card.Title className="title">{movie.title}</Card.Title>                  
+                  <Card.Text className="release">Release Date: {movie.releaseDate}</Card.Text>
+                  <Card.Text className="rating">Rating: {movie.rating}/10</Card.Text>
+                  <Card.Text className="description">{movie.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)}
-                      className='btn-block btn-info'
+                      className='btn-block btn-info button'
                       onClick={() => handleSaveMovie(movie.movieId)}>
                       {savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)
                         ? 'This movie has already been saved!'
