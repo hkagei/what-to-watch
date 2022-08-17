@@ -47,6 +47,7 @@ module.exports = {
   // user comes from `req.user` created in the auth middleware function
   async saveMovie({ user, body }, res) {
     console.log(user);
+    
     try {
       const updatedUser = await User.findOneAndUpdate(
         { _id: user._id },
