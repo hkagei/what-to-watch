@@ -1,10 +1,11 @@
 import React from 'react';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SearchMovies from './pages/SearchMovies';
 import SavedMovies from './pages/SavedMovies';
 import Navbar from './components/Navbar';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql'

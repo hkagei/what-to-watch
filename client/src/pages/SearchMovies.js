@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveMovie, searchMovies } from '../utils/API';
+import { SAVE_MOVIE } from '../utils/mutations';
 import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
+import { useMutation } from '@apollo/client';
 
 const SearchMovies = () => {
   // create state for holding returned google api data
@@ -13,6 +14,8 @@ const SearchMovies = () => {
 
   // create state to hold saved MovieId values
   const [savedMovieIds, setSavedMovieIds] = useState(getSavedMovieIds());
+  //eslint-disable-next-line
+  const [saveMovie, {error} ] = useMutation(SAVE_MOVIE);
 
   // set up useEffect hook to save `savedMovieIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -29,15 +32,15 @@ const SearchMovies = () => {
     }
 
     try {
-      const response = await searchMovies(searchInput);
+      const response = await fetch(`https://www.api.themoviedb.org/3/search/movie?api_key=b301706861e13908cad92231cd20695f&language=en-US&query=${searchInput}`);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
-      const { results } = await response.json();
+      const { items } = await response.json();
 
-      const movieData = results.map((movie) => ({
+      const movieData = items.map((movie) => ({
         movieId: movie.id,
         title: movie.original_title,
         genre: movie.genre_ids.id,
@@ -69,11 +72,10 @@ const SearchMovies = () => {
     }
 
     try {
-      const response = await saveMovie(movieToSave, token);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      //eslint-disable-next-line
+      const {data} = await saveMovie({
+        variables: {movieData: {...movieToSave}}
+      });
 
       // if movie successfully saves to user's account, save movie id to state
       setSavedMovieIds([...savedMovieIds, movieToSave.movieId]);
