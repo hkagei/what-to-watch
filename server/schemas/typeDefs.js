@@ -14,7 +14,7 @@ const typeDefs = gql`
   }
 
   type movie {
-    # _id: ID!
+    {
     movieId: String!
     title: String!
     description: String!
@@ -22,6 +22,7 @@ const typeDefs = gql`
     releaseDate: String
     rating: String!
   }
+}
 
   input movieInput {
     movieId: [String]
