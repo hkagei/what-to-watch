@@ -124,8 +124,6 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (parent, args) => {
-      console.log("AAAAA")
-      console.log(args)
       const user = await User.create(args);
       const token = signToken(user);
       console.log(user, token)
