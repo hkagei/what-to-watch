@@ -1,0 +1,30 @@
+.card{
+    background-color: #b18b45;
+    padding: 15px 20px 18px;
+    width: auto;
+    border: ghostwhite;
+
+}
+.pay-button:hover{
+    box-shadow:whitesmoke;
+}
+.pay-button:disabled:hover{
+    box-shadow: none;
+    font-style: normal;
+  }
+.pay-button{
+    padding: 10px 25px;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    background-color: ghostwhite;
+    border: 0;
+    transition: box-shadow 500ms;
+    cursor:auto;
+}
+.pay-button:disabled{
+    background-color: #b18b45;
+    box-shadow: none;
+    cursor: auto;
+  }
