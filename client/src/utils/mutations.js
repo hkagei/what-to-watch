@@ -13,35 +13,40 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        username
-        email
-      }
+mutation addUser($username: String!, $email: String!, $password: String!) {
+  addUser(username: $username, email: $email, password: $password) {
+    token
+    user {
+      username
+      email
     }
   }
+}
 `;
 
 export const SAVE_MOVIE = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        username
-        email
-      }
-    }
-  }
+    mutation saveMovie($movieData: movieInput!) {
+        saveMovie(movieData: $movieData) {
+              user{
+                savedMovie {
+                  movieId
+                  title
+                  description
+                  image
+                  releaseDate
+                  rating
+              }
+            }
+           
+        }
+}
+
 `;
 
 export const REMOVE_MOVIE = gql`
 mutation removeMovie($movieId: ID!) {
     removeMovie(movieId: $movieId) {
-        _id
-        username
-        email
+        user {         
         savedMovie {
           movieId
           title
@@ -50,6 +55,7 @@ mutation removeMovie($movieId: ID!) {
           releaseDate
           rating
         }
+      }
     }
 }
 `;
