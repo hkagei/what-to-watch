@@ -67,7 +67,7 @@ const SavedMovies = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
+      <Jumbotron fluid className='gold'>
         <Container>
           <h1>Viewing saved movies!</h1>
         </Container>
@@ -82,14 +82,15 @@ const SavedMovies = () => {
           {userData.savedMovies.map((movie) => {
             return (
               <Card key={movie.movieId} border='dark'>
-                {movie.image ? <Card.Img src={movie.image} alt={`The cover for ${movie.title}`} variant='top' /> : null}
+                {movie.image ? <Card.Img src={movie.image} className="cardimg" alt={`The cover for ${movie.title}`} variant='top' /> : null}
                 <Card.Body>
-                  <Card.Title>{movie.title}</Card.Title>
+                  <Card.Title className="title">{movie.title}</Card.Title>                  
+                  <Card.Text className="release">Release Date: {movie.releaseDate}</Card.Text>
+                  <Card.Text className="rating">Rating: {movie.rating}</Card.Text>
                   <Card.Text>{movie.genre_ids}</Card.Text>
-                  <Card.Text>{movie.description}</Card.Text>
-                  <Card.Text>Release Date: {movie.releaseDate}</Card.Text>
-                  <Card.Text>Rating: {movie.rating}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteMovie(movie.movieId)}>
+                  <Card.Text className="description">{movie.description}</Card.Text>
+
+                  <Button className='btn-block button btn-danger' onClick={() => handleDeleteMovie(movie.movieId)}>
                     Delete this movie!
                   </Button>
                 </Card.Body>
