@@ -15,6 +15,7 @@ What to watch is an application that will allow you to organize lists of your fa
 ## Link to deployed app
 
 ## Screenshot
+![what-to-watch screenshot](https://user-images.githubusercontent.com/99004555/185268417-7ab5938b-e49c-42bf-a405-1d20c08ceaba.png)
 
 ## Contributors
 
