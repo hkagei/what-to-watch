@@ -42,12 +42,13 @@ const SearchMovies = () => {
       const movieData = results.map((movie) => ({
         movieId: movie.id,
         title: movie.original_title,
-        genre: movie.genre_ids.id,
         description: movie.overview,
         image: movie.poster_path || '',
         releaseDate: movie.release_date,
         rating: movie.vote_average
       }));
+
+
 
       setSearchedMovies(movieData);
       setSearchInput('');
@@ -67,7 +68,8 @@ const SearchMovies = () => {
     if (!token) {
       return false;
     }
-
+    
+    console.log(movieToSave, token)
     try {
       const { data } = await saveMovie({
         variables: { movieData: { ...movieToSave } }

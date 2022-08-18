@@ -30,11 +30,6 @@ export const SAVE_MOVIE = gql`
               user{
                 savedMovie {
                   movieId
-                  title
-                  description
-                  image
-                  releaseDate
-                  rating
               }
             }
            

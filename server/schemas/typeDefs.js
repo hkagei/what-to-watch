@@ -23,13 +23,14 @@ const typeDefs = gql`
   }
 
   input movieInput {
-    movieId: [String]
+    movieId: Int!
     title: String!
     description: String!
     image: String
     releaseDate: String
-    rating: String!
+    rating: Float!
   }
+
 
   type Query {
     me: User
