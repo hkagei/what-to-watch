@@ -85,12 +85,12 @@ const SearchMovies = () => {
   return (
     <>
       <Jumbotron fluid className='gold'>
-        <Container>
-          <h1>Search for Movies!</h1>
+        <Container className="searchform">
+          <h1 className="searchform">Search for Movies!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
-              <Col xs={12} md={8}>
-                <Form.Control
+              <Col xs={12} md={8} className="searchform">
+                <Form.Control className="inputbox"
                   name='searchInput'
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
@@ -99,7 +99,9 @@ const SearchMovies = () => {
                   placeholder='Search for a movie'
                 />
               </Col>
-              <Col xs={12} md={4}>
+              </Form.Row>
+              <Form.Row>
+              <Col xs={12} md={4} className="searchform">
                 <Button type='submit' className="button" variant='success' size='lg'>
                   Submit Search
                 </Button>

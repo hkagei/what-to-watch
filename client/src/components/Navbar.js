@@ -14,9 +14,6 @@ const AppNavbar = () => {
     <>
       <Navbar expand='lg'>
         <Container className="nav" fluid>
-          <Navbar.Brand as={Link} to='/'>
-            Find Movies
-          </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto nav'>
