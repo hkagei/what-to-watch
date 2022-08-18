@@ -106,7 +106,7 @@
 // module.exports = resolvers;
 
 
-const { User } = require('../models');
+const { User, Movie } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require("apollo-server-express");
 
@@ -115,8 +115,16 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
-          .select('-__v -password')
-
+        .populate({
+          path: "savedMovie",
+          // populate: "savedMovie"
+        })
+          // .select('-__v -password')
+          console.log("------")
+          console.log(userData)
+        // userData.savedMovies.forEach(e => {
+        //   console.log(Object.getPrototypeOf(e))
+        // })
         return userData;
       }
       throw new AuthenticationError('Not logged in');
@@ -133,6 +141,7 @@ const resolvers = {
       return { token, user };
     },
     login: async (parent, { email, password }) => {
+      console.log("hello")
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -148,12 +157,16 @@ const resolvers = {
       return { token, user };
     },
     saveMovie: async (parent, { movieData }, context) => {
+      console.log("bruh")
+      console.log(movieData)
       if (context.user) {
+        console.log(context.user)
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $addToSet: { savedMovies: movieData } },
           { new: true }
         )
+        console.log(updatedUser)
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!')

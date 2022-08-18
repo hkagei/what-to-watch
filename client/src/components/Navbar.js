@@ -13,23 +13,23 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar bg='dark' variant='dark' expand='lg'>
-        <Container fluid>
+        <Container className="nav" fluid>
           <Navbar.Brand as={Link} to='/'>
             Find Movies
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
-            <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/'>
+            <Nav className='ml-auto nav'>
+              <Nav.Link className="navLink" as={Link} to='/'>
                 Search For Movies
               </Nav.Link>
               {/* if user is logged in show saved movies and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
+                  <Nav.Link className="navlink" as={Link} to='/saved'>
                     See Saved Movies
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link className="navLink" onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
@@ -49,10 +49,10 @@ const AppNavbar = () => {
           <Modal.Header closeButton>
             <Modal.Title id='signup-modal'>
               <Nav variant='pills'>
-                <Nav.Item>
+                <Nav.Item className="formlink">
                   <Nav.Link eventKey='login'>Login</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
+                <Nav.Item className="formlink">
                   <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
                 </Nav.Item>
               </Nav>

@@ -27,12 +27,10 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
 export const SAVE_MOVIE = gql`
     mutation saveMovie($movieData: movieInput!) {
         saveMovie(movieData: $movieData) {
-              user{
-                savedMovie {
-                  movieId
-              }
-            }
-           
+          username
+          savedMovie {
+            title
+          }
         }
 }
 

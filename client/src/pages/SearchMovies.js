@@ -69,16 +69,26 @@ const SearchMovies = () => {
       return false;
     }
     
+    console.log(movieToSave)
+    const temp = {
+    "movieId": movieToSave.movieId,
+    "title": movieToSave.title,
+    // "description": "blahabllah",
+    // "image": "pic.jpg",
+    // "releaseDate": "1-1-2000",
+    // "rating": "8"
+  }
     console.log(movieToSave, token)
     try {
       const { data } = await saveMovie({
-        variables: { movieData: { ...movieToSave } }
+        variables: {movieData : temp }
       });
-
+      console.log(data)
       // if movie successfully saves to user's account, save movie id to state
       setSavedMovieIds([...savedMovieIds, movieToSave.movieId]);
     } catch (err) {
-      console.error(err);
+      console.log(error)
+      console.log(err);
     }
   };
 

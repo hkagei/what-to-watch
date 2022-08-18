@@ -10,16 +10,17 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    savedMovie: [movie]
+    savedMovie: [Movie]
   }
 
-  type movie {
-    movieId: String!
+  type Movie {
+    _id: ID
+    movieId: Int!
     title: String!
     description: String!
     image: String
     releaseDate: String
-    rating: String!
+    rating: Int!
   }
 
   input movieInput {
@@ -28,7 +29,7 @@ const typeDefs = gql`
     description: String!
     image: String
     releaseDate: String
-    rating: Float!
+    rating: Int!
   }
 
 
