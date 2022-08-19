@@ -7,9 +7,9 @@ import {removeMovieId} from '../utils/localStorage';
 import Auth from '../utils/auth'; 
 
 const SavedMovies = () => {
-  const { loading , data } = useQuery(QUERY_ME);
+  const { data } = useQuery(QUERY_ME);
   //eslint-disable-next-line
-  const [removeMovie, {error} ] = useMutation(REMOVE_MOVIE);
+  const [removeMovie, { error } ] = useMutation(REMOVE_MOVIE);
   const [userData] = data?.me || {};
 
   
@@ -24,20 +24,13 @@ const SavedMovies = () => {
 
     try {
       //eslint-disable-next-line
-      const { data } = await removeMovie({
-       variables: {movieId}
-      });
-      removeMovieId(movieId) 
-
+      const { data } = await handleDeleteMovie(movieId, token);
+      removeMovieId(movieId);
     } catch (err) {
       console.error(err);
     }
   };
 
-  // if data isn't here yet, say so
-  if (loading) {
-    return <h2>LOADING...</h2>;
-  }
 
   return (
     <>
@@ -55,7 +48,7 @@ const SavedMovies = () => {
         <CardColumns>
           {userData.savedMovies.map((movie) => {
             return (
-              <Card key={movie?.movieId} border='dark'>
+              <Card key={movie.movieId} border='dark'>
                 {movie.image ? <Card.Img src={movie.image} alt={`The cover for ${movie.title}`} variant='top' /> : null}
                 <Card.Body>
                   <Card.Title>{movie.title}</Card.Title>
@@ -63,7 +56,7 @@ const SavedMovies = () => {
                   <Card.Text>{movie.description}</Card.Text>
                   <Card.Text>Release Date: {movie.releaseDate}</Card.Text>
                   <Card.Text>Rating: {movie.rating}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteMovie(movie?.movieId)}>
+                  <Button className='btn-block btn-danger' onClick={() => handleDeleteMovie(movie.movieId)}>
                     Delete this movie!
                   </Button>
                 </Card.Body>

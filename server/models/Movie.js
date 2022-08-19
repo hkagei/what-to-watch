@@ -4,7 +4,7 @@ const { Schema } = require('mongoose');
 const movieSchema = new Schema({
   movieId:
   {
-    type: String,
+    type: Number,
   },
   title: {
     type: String,
@@ -22,7 +22,7 @@ const movieSchema = new Schema({
     type: String,
   },
   rating: {
-    type: String,
+    type: Number,
     required: true,
   },
 });

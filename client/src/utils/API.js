@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // route to get logged in user's info (needs the token)
 export const getMe = (token) => {
   return fetch('/api/users/me', {
@@ -52,8 +54,8 @@ export const deleteMovie = (movieId, token) => {
 
 
 
-export const searchMovies = (query) => {
-  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=06439846ed9757bb6b3c2ed866d66876&query=${query}`);
+export const searchMovies = (movieTitle) => {
+  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=06439846ed9757bb6b3c2ed866d66876&query=${movieTitle}`);
 };
 
 // https://.themoviedb.org/3/movie/550?api_key=06439846ed9757bb6b3c2ed866d66876api
