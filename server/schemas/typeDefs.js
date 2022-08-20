@@ -10,26 +10,26 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    savedMovie: [movie]
+    savedMovies: [movie]
   }
 
   type movie {
-    # _id: ID!
-    movieId: [String]
-    original_title: String!
-    overview: String!
-    poster_path: String
-    release_date: String
-    vote_average: String!
+    _id: ID!
+    movieId: Int
+    title: String!
+    description: String
+    image: String
+    releaseDate: String
+    rating: Float
   }
 
   input movieInput {
-    movieId: [String]
-    original_title: String!
-    overview: String!
-    poster_path: String
-    release_date: String
-    vote_average: String!
+    movieId: Int
+    title: String!
+    description: String
+    image: String
+    releaseDate: String
+    rating: Float
   }
 
   type Query {
@@ -39,8 +39,8 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveMovie(movieData: movieInput!): Auth
-    removeMovie(movieId: ID!): Auth
+    saveMovie(movieData: movieInput): User
+    removeMovie(movieId: ID!): User
   }
 
   type Auth {

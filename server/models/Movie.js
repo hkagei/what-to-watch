@@ -4,26 +4,26 @@ const { Schema } = require('mongoose');
 const movieSchema = new Schema({
   movieId:
   {
-    type: String,
+    type: Number,
   },
-  original_title: {
+  title: {
     type: String,
     required: true,
   },
   // saved movie id from movies
-  overview: {
+  description: {
     type: String,
-    required: true,
+    //required: true,
   },
-  poster_path: {
-    type: String,
-  },
-  release_date: {
+  image: {
     type: String,
   },
-  vote_average: {
+  releaseDate: {
     type: String,
-    required: true,
+  },
+  rating: {
+    type: Number,
+    required: false,
   },
 });
 

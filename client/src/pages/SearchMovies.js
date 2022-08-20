@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveMovie, searchMovies } from '../utils/API';
+// remove saveMovie from Utils API 
+import { searchMovies } from '../utils/API';
 import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
+import { useMutation } from '@apollo/client';
+import { SAVE_MOVIE } from '../utils/mutations';
+
 
 const SearchMovies = () => {
   // create state for holding returned google api data
   const [searchedMovies, setSearchedMovies] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
-
+  const [saveMovie, {error}] = useMutation(SAVE_MOVIE);
   // create state to hold saved MovieId values
   const [savedMovieIds, setSavedMovieIds] = useState(getSavedMovieIds());
 
@@ -69,11 +73,12 @@ const SearchMovies = () => {
     }
 
     try {
-      const response = await saveMovie(movieToSave, token);
+      const{data} = await saveMovie({variables: {movieData: {...movieToSave}}});
+      // const response = await saveMovie(movieToSave, token);
 
-      if (!response) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response) {
+      //   throw new Error('something went wrong!');
+      // }
 
       // if movie successfully saves to user's account, save movie id to state
       setSavedMovieIds([...savedMovieIds, movieToSave.movieId]);
