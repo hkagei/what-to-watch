@@ -28,21 +28,21 @@ export const loginUser = (userData) => {
   });
 };
 
-// save book data for a logged in user
-export const saveBook = (bookData, token) => {
-  return fetch('/api/users', {
+// save movie data for a logged in user
+export const saveMovie = (movieData, token) => {
+  return fetch('/api/users/movies', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(bookData),
+    body: JSON.stringify(movieData),
   });
 };
 
-// remove saved book data for a logged in user
-export const deleteBook = (bookId, token) => {
-  return fetch(`/api/users/books/${bookId}`, {
+// remove saved movie data for a logged in user
+export const deleteMovie = (movieId, token) => {
+  return fetch(`/api/users/movies/${movieId}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`,
@@ -50,8 +50,10 @@ export const deleteBook = (bookId, token) => {
   });
 };
 
-// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
-export const searchGoogleBooks = (query) => {
-  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+
+
+export const searchMovies = (query) => {
+  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=06439846ed9757bb6b3c2ed866d66876&query=${query}`);
 };
+
+// https://.themoviedb.org/3/movie/550?api_key=06439846ed9757bb6b3c2ed866d66876api
