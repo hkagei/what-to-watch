@@ -89,13 +89,13 @@ const SearchMovies = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
-        <Container>
-          <h1>Search for Movies!</h1>
+      <Jumbotron fluid className='gold'>
+        <Container className="searchform">
+          <h1 className="searchform">Search for Movies!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
-              <Col xs={12} md={8}>
-                <Form.Control
+              <Col xs={12} md={8} className="searchform">
+                <Form.Control className="inputbox"
                   name='searchInput'
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
@@ -104,8 +104,10 @@ const SearchMovies = () => {
                   placeholder='Search for a movie'
                 />
               </Col>
-              <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+              </Form.Row>
+              <Form.Row>
+              <Col xs={12} md={4} className="searchform">
+                <Button type='submit' className="button" variant='success' size='lg'>
                   Submit Search
                 </Button>
               </Col>
@@ -123,19 +125,19 @@ const SearchMovies = () => {
         <CardColumns>
           {searchedMovies.map((movie) => {
             return (
-              <Card key={movie.movieId} border='dark'>
+              <Card key={movie.movieId} border='dark' classname="card">
                 {movie.image ? (
-                  <Card.Img src={"https://image.tmdb.org/t/p/w500/" + movie.image} alt={`The cover for ${movie.title}`} variant='top' />
+                  <Card.Img src={"https://image.tmdb.org/t/p/w500/" + movie.image} className="cardimg" alt={`The cover for ${movie.title}`} variant='top' />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{movie.title}</Card.Title>
-                  <Card.Text>{movie.description}</Card.Text>
-                  <Card.Text>Release Date: {movie.releaseDate}</Card.Text>
-                  <Card.Text>Rating: {movie.rating}</Card.Text>
+                  <Card.Title className="title">{movie.title}</Card.Title>                  
+                  <Card.Text className="release">Release Date: {movie.releaseDate}</Card.Text>
+                  <Card.Text className="rating">Rating: {movie.rating}/10</Card.Text>
+                  <Card.Text className="description">{movie.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)}
-                      className='btn-block btn-info'
+                      className='btn-block btn-info button'
                       onClick={() => handleSaveMovie(movie.movieId)}>
                       {savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)
                         ? 'This movie has already been saved!'
